@@ -29,7 +29,7 @@
 - python_speech_features==0.6 (test_tflite_numpy.py使用)
 
 ## 运行说明
-使用MFCC处理后的数据进行神经网络推理
+使用MFCC处理后的数据进行神经网络推理(若不需要考虑MFCC预处理过程，推荐使用此脚本)
 ```
 python3 zynq/test_sdcard_numpy.py
 ```
@@ -39,4 +39,4 @@ python3 zynq/test_sdcard_numpy.py
 bash zynq/test_tflite_numpy.sh
 ```
 
-想要保存单次推理的中间数据，请参考[README.md](../get_kernel_feature_area/README.md)
+想要查看或保存单次推理的中间数据，请参考[README.md](../get_kernel_feature_area/README.md)
