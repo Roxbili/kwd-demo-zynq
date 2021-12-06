@@ -1,0 +1,11 @@
+stem_conv: 5
+inverted_residual_1_expansion: 10
+inverted_residual_1_depthwise: 29
+inverted_residual_1_projection: 9
+inverted_residual_2_expansion: 8
+inverted_residual_2_depthwise: 29
+inverted_residual_2_projection: 10
+inverted_residual_3_expansion: 4
+inverted_residual_3_depthwise: 32
+inverted_residual_3_projection: 10
+Conv2D: 17
