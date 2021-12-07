@@ -27,16 +27,40 @@
 - python3
 - Numpy
 - python_speech_features==0.6 (test_tflite_numpy.py使用)
+- vnc (在ZYNQ上运行演示demo时需要)
 
 ## 运行说明
+
+### PC / ZYNQ 均可运行
 使用MFCC处理后的数据进行神经网络推理(若不需要考虑MFCC预处理过程，推荐使用此脚本)
-```
+```python
 python3 zynq/test_sdcard_numpy.py
 ```
 
 使用正常数据集，进行MFCC处理后再进行神经网络推理
-```
+```python
 bash zynq/test_tflite_numpy.sh
 ```
 
-想要查看或保存单次推理的中间数据，请参考[README.md](../get_kernel_feature_area/README.md)
+想要查看或保存单次推理的中间数据，请参考[README.md](get_kernel_feature_area/README.md)
+
+### ZYNQ 演示
+
+该部分需要ZNYQ上拥有Linux操作系统、[VNC环境](zynq/README.md)、Python3及对应的环境。
+
+ZYNQ板子上的Python3及环境可使用[Berryconda3安装](https://github.com/jjhelmus/berryconda)。
+
+1. ZYNQ板子开启一个vncserver
+2. PC使用vnc软件(例如VNCViewer)连接ZYNQ板子对应的vncserver
+3. 打开一个终端，运行PL侧模拟脚本（若拥有真实的PL侧bitstream并且已经烧写至ZYNQ板子上，此步骤可忽略）
+```python
+python3 zynq/pl_simulate.py
+```
+4. 打开另一个终端，运行PS端处理脚本
+```python
+python3 zynq/tkinter_kws.py
+```
+
+演示效果如图所示：
+
+<img src="./images/demo.gif" width="500px"></img>
