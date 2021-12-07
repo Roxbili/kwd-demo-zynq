@@ -2,6 +2,9 @@
 
 ## 文件结构说明
 
+### 根目录
+- gen_bin.py: 生成初始化信息，包括net info、weight、bias、scale_int，可生成bin格式或者txt格式
+
 ### zynq
 - kws_dataset_client.py: 运行测试集，将结果返回上位机
 - input_data_zynq.py: 加载测试集时的预处理文件
