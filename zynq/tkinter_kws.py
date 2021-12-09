@@ -73,8 +73,8 @@ class App(PSPLTalk):
     
     def show_result(self):
         # 首先拿到数据
-        # path = next(self.input_data_path)     # 遍历数据集
-        path = self.input_object.data_path[0]   # 测试用，仅看0_no.npy
+        path = next(self.input_data_path)     # 遍历数据集
+        # path = self.input_object.data_path[0]   # 测试用，仅看0_no.npy
         input_data = np.load(path)
         # 接着监测标记位是否改变，是的话发送数据，否则阻塞
         while not self.input_object.sendData(input_data): pass
