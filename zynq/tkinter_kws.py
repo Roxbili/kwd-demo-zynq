@@ -33,6 +33,7 @@ class App(PSPLTalk):
         self.input_object.reset_flag()   # 初始化标记位
         self.input_object.info2bram()    # 发送基本的参数
         self.input_data_path = iter(self.input_object.data_path)    # 创建输入数据路径的迭代器
+        self.correct_cnt = 0
 
         self.timer = timeRecorder()
 
@@ -73,16 +74,24 @@ class App(PSPLTalk):
     
     def show_result(self):
         # 首先拿到数据
-        path = next(self.input_data_path)     # 遍历数据集
+        try:
+            path = next(self.input_data_path)     # 遍历数据集
+        except:
+            # 计算准确率
+            acc = self.correct_cnt / len(self.input_object.data_path)
+            print("Test accuracy = {:.2f}% (N={})".format(acc * 100, len(self.input_object.data_path)))
+            return
+
         # path = self.input_object.data_path[0]   # 测试用，仅看0_no.npy
         input_data = np.load(path)
         # 接着监测标记位是否改变，是的话发送数据，否则阻塞
+        self.timer.start()
         while not self.input_object.sendData(input_data): pass
 
         while True:
             result_flag = self.bram.read_oneByOne(1, start=0x0, map_id=1)
             if result_flag[0] == 1:
-                self.timer.start()
+                self.timer.end()
 
                 # reset result flag
                 self.bram.write(b'\x00\x00\x00\x00', start=0x0, map_id=1)
@@ -93,9 +102,13 @@ class App(PSPLTalk):
                 self._set_text(word)
                 print('path: %s, show word %s' % (path, word))
 
-                self.timer.end()
                 print('Total time: {}'.format(self.timer.get_total_time()))
                 print('Average time: {}'.format(self.timer.get_avg_time()))
+
+                # 统计准确率个数
+                if word in path:
+                    self.correct_cnt += 1
+
                 self.word.after(1, self.show_result)    # 表示接着运行
                 break
 
