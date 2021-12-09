@@ -12,6 +12,7 @@ import time
 # sys.path.append('../')
 
 from layers import conv2d, depthwise_conv2d, relu, pooling
+from tkinter_kws import timeRecorder
 
 # os.chdir('../')
 
@@ -544,7 +545,7 @@ def run_inference():
     
     words_list = 'silence,unknown,yes,no,up,down,left,right,on,off,stop,go'.split(',')
 
-    start_time = time.time()
+    timer = timeRecorder()
 
     ########################### simulate lite model ###########################
 
@@ -563,8 +564,12 @@ def run_inference():
         # label_index = np.argmax(test_ground_truth, axis=1)[0]
         # save_bin(data, 'test_log/mobilenetv3_quant_gen/bin/data/test/test_{}_{}.bin'.format(i, label_index))
 
+        # recode average running time
+        timer.start()
         # calculate accuracy
         output_uint8 = simulate_net(test_fingerprints.reshape(-1, 49, 10, 1))
+        timer.end()
+
         predicted_indices = np.argmax(output_uint8, 1)
         test_accuracy = 0.
         if words_list[predicted_indices[0]] in path:
@@ -573,11 +578,13 @@ def run_inference():
         batch_size = 1
         total_accuracy += (test_accuracy * batch_size) / set_size
 
+        print('path: %s' % path)
+        print('Total time: {}'.format(timer.get_total_time()))
+        print('Average time: {}'.format(timer.get_avg_time()))
+
     print('Test accuracy = %.2f%% (N=%d)' % (total_accuracy * 100,
                                                             set_size))
 
-    end_time = time.time()
-    print('Running time: {} second'.format(end_time - start_time))
 
 def main():
     # Create the model, load weights from checkpoint and run on train/val/test

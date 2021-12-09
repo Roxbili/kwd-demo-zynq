@@ -54,7 +54,7 @@ bash zynq/test_tflite_numpy.sh
 
 ### ZYNQ 演示
 
-#### 演示demo1
+#### 演示demo1（仅ZYNQ运行）
 
 该部分需要ZNYQ上拥有Linux操作系统、[VNC环境](zynq/README.md)、Python3及对应的环境。
 
@@ -75,7 +75,7 @@ python3 zynq/tkinter_kws.py
 
 <img src="./images/demo1.gif" width="500px"></img>
 
-#### 演示demo2
+#### 演示demo2（ZYNQ运行客户端，PC运行服务端）
 
 (本步骤中需要去修改server和client脚本内的IP地址)
 
