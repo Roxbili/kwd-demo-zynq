@@ -1,5 +1,13 @@
 # KWS Demo
 
+## 数据集
+下载[speech_commands数据集](https://www.tensorflow.org/datasets/catalog/speech_commands)并放在`speech_dataset`目录下:   
+链接: https://pan.baidu.com/s/1UdQQxlPPwjOHFjGnM1B_jg 提取码: ehb2
+
+## 模型
+(只需要`test_log`即可)
+下载链接：链接: https://pan.baidu.com/s/1uvnOpvy0bTUiBc0VcEovug 提取码: p33p
+
 ## 文件结构说明
 
 ### 根目录
