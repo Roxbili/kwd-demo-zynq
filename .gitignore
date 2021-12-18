@@ -4,4 +4,3 @@ __pycache__
 *.zip
 test_log
 speech_dataset
-images
