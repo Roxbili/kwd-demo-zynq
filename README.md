@@ -24,6 +24,7 @@
 - tmp.py: tkinter测试代码，实现了通过Queue让mainloop和工作进程的数据共享，因此该代码暂时留下
 - test_tflite_numpy.py: 在zynq上测试数据集的准确率(未提前处理好MFCC)
 - test_sdcard_numpy.py: 使用mfcc预处理好的数据进行前向推理。**使用该脚本发现精度差异均来自mfcc预处理**
+- save_mfcc_dataset.py: 保存数据集
 
 ### server
 - 演示demo2、3中上位机运行脚本
